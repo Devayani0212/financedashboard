@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-container" id="app">
+    <header class="app-header">
+      <div>
+        <h1>Finance Dashboard</h1>
+        <p class="subtitle">Track balance, spending, and transactions</p>
+      </div>
+      <div class="controls">
+        <label>
+          Role
+          <select id="roleSelect" aria-label="Role select">
+            <option value="viewer">Viewer</option>
+            <option value="admin">Admin</option>
+          </select>
+        </label>
+        <label class="toggle-label">
+          Dark Mode
+          <input type="checkbox" id="darkModeToggle" aria-label="Enable dark mode" />
+        </label>
+      </div>
+    </header>
+
+    <section class="cards" id="summaryCards"></section>
+
+    <section class="grid-layout">
+      <article class="card chart-card" id="timeChartCard">
+        <h2>Balance Trend</h2>
+        <svg id="balanceTrend" viewBox="0 0 400 100" preserveAspectRatio="none" aria-label="Balance trend chart"></svg>
+      </article>
+
+      <article class="card chart-card" id="categoryChartCard">
+        <h2>Spending by Category</h2>
+        <div id="categoryBars" class="bars"></div>
+      </article>
+    </section>
+
+    <section class="card" id="insights">
+      <h2>Insights</h2>
+      <ul id="insightsList" class="insights-list"></ul>
+    </section>
+
+    <section class="card" id="transactionsSection">
+      <div class="section-header">
+        <h2>Transactions</h2>
+        <div class="trans-controls">
+          <input type="text" id="searchInput" placeholder="Search by description or category" aria-label="Search transactions" />
+          <select id="typeFilter" aria-label="Filter by transaction type">
+            <option value="all">All</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <select id="sortSelect" aria-label="Sort transactions">
+            <option value="date_desc">Date ↓</option>
+            <option value="date_asc">Date ↑</option>
+            <option value="amount_desc">Amount ↓</option>
+            <option value="amount_asc">Amount ↑</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap" id="transactionsTableWrap"></div>
+
+      <article id="adminForm" class="admin-form hidden">
+        <h3>Add / Edit Transaction</h3>
+        <form id="txnForm">
+          <div class="form-group">
+            <label>Date<input type="date" id="txnDate" required /></label>
+          </div>
+          <div class="form-group">
+            <label>Description<input type="text" id="txnDesc" required /></label>
+          </div>
+          <div class="form-group">
+            <label>Amount<input type="number" step="0.01" id="txnAmount" required /></label>
+          </div>
+          <div class="form-group">
+            <label>Category<input type="text" id="txnCategory" required /></label>
+          </div>
+          <div class="form-group">
+            <label>Type<select id="txnType"><option value="expense">Expense</option><option value="income">Income</option></select></label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="txnSubmitBtn">Save</button>
+            <button type="button" id="txnCancelBtn">Cancel</button>
+          </div>
+        </form>
+      </article>
+    </section>
+
+    <footer class="footer">Last saved in local storage automatically. Demo assignment UI.</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
